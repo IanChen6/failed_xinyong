@@ -68,7 +68,11 @@ class szcredit(object):
         for t in range(3):
             session = requests.session()
             try:
-                session.proxies = sys.argv[1]
+                self.logger.info(type(sys.argv[1]))
+                proxy = sys.argv[1].replace("'", '"')
+                self.logger.info(proxy)
+                proxy = json.loads(proxy)
+                session.proxies = proxy
             except:
                 self.logger.info("未传代理参数，启用本机IP")
             yzm_url = 'https://www.szcredit.org.cn/web/WebPages/Member/CheckCode.aspx?'
